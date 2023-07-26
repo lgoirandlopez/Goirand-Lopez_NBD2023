@@ -67,7 +67,7 @@ Parameters :
 - measwinddim : String, optional (default = 'fullwind'). Selection of the dimension of the transformed data.
   - If '1D', you will have one measure for each window: window participation (measoption='bin'), 
                 delay to NE if activity within the window (measoption='delay') 
-                or the date of activity within the window (measoption='date')
+                or the date of activity within the window (measoption='date').
   - If 'fullwind', you will have measure for each frame of the choosen window : binarized activity (measoption='bin'),
                 sparse delay to NE if activity and 0 else (measoption='delay') 
                 or sparse date of activity and 0 if not (measoption='date').
