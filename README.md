@@ -31,7 +31,7 @@ NEAnalysis = NetworkEventsAnalysis(spk,**kwargs)
 ```
 The initialization parameters are defined by the user :
 - spk : Numpy array (ncell,frames length). Binary matrix of transient calcium onsets.
-- NE : 1D-numpy array, optional (default = None). Network Events dates list If you already have dectected the Network Events
+- NE : 1D-numpy array, optional (default = None). Network Events dates list If you already have dectected the Network Events.
 - Framerate : Float, optional (default = None). The recording framerate in frame/s.
 - SliceName : String, optional (default = ''). Name of your data. The default is ''.
 
@@ -84,7 +84,7 @@ NEAnalysis.NEwindowfunClusters(NEmaxlag=7,NEwind='full',measoption='delay',measw
 bothdirectionmeas=True,metric='cosine',linkagechoice='average',threscalcul=True,nsurr=500,siglevel=.05)
 ```
             
-You also for example obtain the significant correlation :
+You can also obtain the significant correlation :
 ```
 NEspk = np.zeros(np.shape(NEAnalysis.spk)[1])
 NEspk[NEAnalysis.NE] = np.ones(len(NEAnalysis.NE))
