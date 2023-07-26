@@ -61,8 +61,7 @@ Parameters :
 - NEwind : String, optional (default = 'full'). Selection of the part of the NE window you want to study, NEwind can be 'pre' if you want to check only preNE part, 'post' for postNE part only or 'full' for the whole NEwindow. The default is 'full'.
 - measoption : String, optional (default = 'delay'). Selection of the type of measure you want to transform the data.
   - If 'bin', the data will be binarize, 1 if activity and 0 if no activity in the window.
-  - If 'delay', the data will be the delay to the NE date and 0 if no activity in the window. 
-  - If NEwind = 'full', the delay is calculatd from the start of window centered in the NE (1 - 2*NEmaxlag+1).
+  - If 'delay', the data will be the delay to the NE date and 0 if no activity in the window. If NEwind = 'full', the delay is calculatd from the start of window centered in the NE (1 - 2*NEmaxlag+1).
   - If 'date', the data will be the date of the activity in the window, 0 if no activity in the window.
 - measwinddim : String, optional (default = 'fullwind'). Selection of the dimension of the transformed data.
   - If '1D', you will have one measure for each window: window participation (measoption='bin'), 
