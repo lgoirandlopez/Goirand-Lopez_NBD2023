@@ -35,7 +35,7 @@ The initialization parameters are defined by the user :
 - Framerate : Float, optional (default = None). The recording framerate in frame/s.
 - SliceName : String, optional (default = ''). Name of your data. The default is ''.
 
-If needed you can detect the network events as follow after a first initialization :
+If needed you can detect the network events as follow after a first initialization before reinitializing NetworkEventsAnalysis with the detected network events :
 ```
 (NetworkEvents,NEOnsets,NEoffsets) = NEAnalysis.detection_network_events(spk,**kwargs)
 ```
