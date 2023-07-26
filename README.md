@@ -48,6 +48,8 @@ The detection parameters will be :
 - FrameRate : Float, optional (default = None)
 - **kwargplot : keyword argument for ploting. Scatter options for the rasterplot.
 
+As result you will have the network event date (calculated as described in the method of Goirand-Lopez et al., NBD(2023)) stored in NetworkEvents and the onsets and offsets of the detected network events will be respectively stored in NEOnsets and NEOffsets.
+
 ### Example of analysis
 Once the network events are detected (After using the detection_network_events function or enter the NE dates during the NetworkEventsAnalysis initialization) you can run the clustering analysis :
 ```
