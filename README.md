@@ -85,8 +85,8 @@ bothdirectionmeas=True,metric='cosine',linkagechoice='average',threscalcul=True,
             
 You can also obtain the significant correlation :
 ```
-NEspk = np.zeros(np.shape(NEAnalysis.spk)[1])
-NEspk[NEAnalysis.NE] = np.ones(len(NEAnalysis.NE))
+NEspk = np.zeros(np.shape(NEAnalysis.spk)[1]) # Creation of the binary vector corresponding to network event frame date
+NEspk[NEAnalysis.NE] = np.ones(len(NEAnalysis.NE)) # Vector filled with 1 at each frame corresponding to a network event
 NEAnalysis.SigCorrelation(NEAnalysis.spk,NEspk,NEAnalysis.NEmaxlag,nsurr=1000) 
 ```
 Here the parameters of the significant correlation are : 
