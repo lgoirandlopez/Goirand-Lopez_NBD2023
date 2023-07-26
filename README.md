@@ -97,7 +97,8 @@ Here the parameters of the significant correlation are :
 - nsurr : Int, optional (default = 1000). Number of surrogate data to generate to calculate threshold.
 
 ## Authors
-lucas.goirand-lopez@inserm.fr
+lucas.goirand-lopez@inserm.fr 
+lgoirandlopez@gmail.com
 
 ## License
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
