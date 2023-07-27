@@ -7,6 +7,8 @@ Created on Tue Jun 13 17:38:06 2023
 import numpy as np
 import time
 import sklearn
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import DBSCAN
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 
@@ -33,14 +35,14 @@ class NetworkEventsAnalysis():
         '''
         self.spk = spk
         if NE is None :
-            print('***************************'+' You did not give a Network events frame date list, you can use the detect_network_event fonction of this class to obtain it '
-                  +'***************************')
+            print('\n ***************************'+' You did not give a Network events frame date list, you can use the detect_network_event fonction of this class to obtain it '
+                  +'*************************** \n')
         else :                
             self.NE = NE
         self.ActiveCellslist = [sum(spk[ii])>0 for ii in range(len(spk))]
         self.Framerate = Framerate
         if self.Framerate is not None :
-            self.time = np.arange(self.dim[1])/self.Framerate
+            self.time = np.arange(np.shape(self.spk)[1])/self.Framerate
         self.SliceName = SliceName
         
     
@@ -55,7 +57,7 @@ class NetworkEventsAnalysis():
             
         '''
         if self.Framerate is None :
-            print('ERROR!!!! You do not give the framerate so the experimental time is not calculable')
+            raise NameError(' You do not give the framerate so the experimental time is not calculable ')
         else :
             return self.time
     def AvgMinDistFun(self,x,y) :
@@ -322,15 +324,15 @@ class NetworkEventsAnalysis():
         # --------------------- Check Options ---------------------
         measoptionlist = ['bin','delay','date']
         if not any([x.lower()==measoption.lower() for x in measoptionlist]) : # Avoid problème of transformation
-            print('Warning : The transformation measure option entered is not valable, the option was set to bin')
+            print('\n Warning : The transformation measure option entered is not valable, the option was set to bin \n ')
             measoption = 'bin'
         measwinddimlist = ['1d','fullwind']
         if not any([x.lower()==measwinddim.lower() for x in measwinddimlist]) : # Avoid problème of transformation
-            print('Warning : The transformation dimension option entered is not valable, the option was set to 1D')
+            print('\n Warning : The transformation dimension option entered is not valable, the option was set to 1D \n ')
             measwinddim = '1D'
         NEwindlist = ['pre','post','full']
         if not any([x.lower()==NEwind.lower() for x in NEwindlist]) : # Avoid problème of transformation
-            print('Warning : The window option entered is not valable, the option was set to preNE')    
+            print('\n Warning : The window option entered is not valable, the option was set to preNE \n ')    
             NEwind = 'pre'
         
         # --------------------- Print information for users ---------------------
@@ -448,19 +450,19 @@ class NetworkEventsAnalysis():
         # --------------------- Check Options ---------------------
         measoptionlist = ['bin','delay','date']
         if not any([x.lower()==measoption.lower() for x in measoptionlist]) : # Avoid problème of transformation
-            print('Warning : The transformation measure option entered is not valable, the option was set to bin')
+            print('\n Warning : The transformation measure option entered is not valable, the option was set to bin \n')
             measoption = 'bin'
         measwinddimlist = ['1d','fullwind']
         if not any([x.lower()==measwinddim.lower() for x in measwinddimlist]) : # Avoid problème of transformation
-            print('Warning : The transformation dimension option entered is not valable, the option was set to 1D')
+            print('\n Warning : The transformation dimension option entered is not valable, the option was set to 1D \n')
             measwinddim = '1D'
         NEwindlist = ['pre','post','full']
         if not any([x.lower()==NEwind.lower() for x in NEwindlist]) : # Avoid problème of transformation
-            print('Warning : The window option entered is not valable, the option was set to preNE')    
+            print('\n Warning : The window option entered is not valable, the option was set to preNE \n')    
             NEwind = 'pre'
         
-        if NEwind.lower() == 'full' and measoption.lower() == 'bin' and measwinddim.lower() == 'fullwind' :
-            print('!!!Threshold research is useless, the shift of surrogate data has no sens in full window and participation only!!!')
+        if NEwind.lower() == 'full' and measoption.lower() == 'bin' and measwinddim.lower() == '1d' :
+            print('\n !!!Threshold research is useless, the shift of surrogate data has no sens in 1D and participation only!!! \n')
             return None
         
         # --------------------- Print information for users ---------------------
@@ -650,7 +652,7 @@ class NetworkEventsAnalysis():
             colorselem=[[0,0,0] for x in range(np.shape(data)[0])]
         else :
             if np.shape(colorselem)[0]<np.shape(data)[0] :
-                print('Error! The shape of colorselem is not fitting the number of elements')  
+                print('\n Error! The shape of colorselem is not fitting the number of elements \n')  
         f,ax = plt.subplots()
         numactv = 0
         for ind in range(np.shape(data)[0]):
@@ -714,7 +716,7 @@ class NetworkEventsAnalysis():
         Clustering object added to the global object.
 
         '''
-        print('···· Clustering Hierarchical Ascendant selectioned ····')
+        print('\n ···· Clustering Hierarchical Ascendant selectioned ···· \n')
         self.metric = metric
         self.linkagechoice = linkagechoice
         if threscalcul :
@@ -725,9 +727,9 @@ class NetworkEventsAnalysis():
                                                         measoption=self.measoption,measwinddim=self.measwinddim,
                                                         bothdirectionmeas=self.bothdirectionmeas, metric=self.metric)
         else :
-            if thres is None :
-                raise NameError('You need to define a threshold if no calculation')
             self.distthresclust = thres
+        if self.distthresclust  is None :
+            raise NameError('You need to define a threshold if no calculation or if the threshold is not calculable ')
         print('Distance threshold for cluster is : {:.3f}'.format(self.distthresclust))
         if len(dataforcluster) > 1 :
             if not self.bothdirectionmeas :
